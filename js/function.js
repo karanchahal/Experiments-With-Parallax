@@ -1,4 +1,42 @@
+var postTop;
+var winsHeight;
+
+function posts(windowScroll){
+
+    var goal = postTop - winsHeight/8;
+    var offset;
+
+    if(windowScroll < goal) {
+      offset = Math.min(0.005*Math.pow(windowScroll - goal,2),winsHeight);
+    }
+    else {
+      offset =0;
+    }
+
+    $('.post-1').css({'transform': 'translate(-'+ offset +'px,' + offset*0.2+'px)'});
+
+
+    $('.post-3').css({'transform': 'translate('+ offset +'px,' + offset*0.2+'px)'});
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
 $(window).scroll(function() {
+
+
+
+
+
   var windowScroll = $(this).scrollTop();
 
   $('.logo').css({
@@ -38,7 +76,7 @@ $(window).scroll(function() {
 
 
   if(windowScroll > $('.blog-posts').offset().top - $(window).height()) {
-    var offset = Math.min(0,windowScroll - $('.blog-posts').offset().top +
+    /*var offset = Math.min(0,windowScroll - $('.blog-posts').offset().top +
                 ($(window).height()) - 350);
 
     $('.post-1').css({
@@ -48,6 +86,15 @@ $(window).scroll(function() {
     $('.post-3').css({
       'transform':'translate('+Math.abs(offset)+'px,'+Math.abs(offset*0.2)+'px)'
     });
+*/
+
+    //adding quadratic eading
+    postTop = $('.blog-posts').offset().top;
+    winsHeight = $(window).height();
+    posts(windowScroll);
+
+
+
   }
 
 
